@@ -1,0 +1,18 @@
+using System; 
+class Program 
+{
+    static void Main() 
+    {
+        Console.Write("Введите строку: "); // запрос строки у пользователя
+        string input = Console.ReadLine(); // считывание введенной строки
+        if (string.IsNullOrEmpty(input)) // проверка, является ли ввод пустым
+        {
+            Console.WriteLine("Ошибка: строка не может быть пустой"); // вывод ошибки при пустом вводе
+            return; 
+        }
+        char[] chars = input.ToCharArray(); // преобразование строки в массив символов
+        Array.Reverse(chars); // переворачиваем массив символов
+        string reversed = new string(chars); // создание новой строки из перевернутого массива
+        Console.WriteLine($"Строка в обратном порядке: {reversed}"); 
+    }
+}
