@@ -1,0 +1,23 @@
+using System; 
+
+class Program 
+{
+    static void Main() 
+    {
+        Console.Write("Введите первое число: "); // запрос на первое число
+        if (!int.TryParse(Console.ReadLine(), out int a)) // проверка, является ли ввод целым числом
+        {
+            Console.WriteLine("Ошибка: введите целое число"); // вывод ошибки при некорректном вводе
+            return; 
+        }
+
+        Console.Write("Введите второе число: "); // запрос на второе число
+        if (!int.TryParse(Console.ReadLine(), out int b)) // проверка, является ли ввод целым числом
+        {
+            Console.WriteLine("Ошибка: введите целое число"); // вывод ошибки при некорректном вводе
+            return; 
+        }
+
+        Console.WriteLine($"Сумма: {a + b}"); // вывод суммы двух чисел
+    }
+}
