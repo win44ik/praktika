@@ -1,0 +1,21 @@
+using System; 
+class Program 
+{
+    static void Main() 
+    {
+        Console.Write("Введите число: "); // запрос на число у пользователя
+        if (!long.TryParse(Console.ReadLine(), out long n) || n < 0) // проверка, является ли ввод числом и неотрицательным
+        {
+            Console.WriteLine("Ошибка: введите неотрицательное число"); // вывод ошибки при некорректном вводе
+            return; 
+        }
+        Console.WriteLine($"Факториал {n} = {Factorial(n)}"); // вывод результата вычисления факториала
+    }
+    static long Factorial(long n) // метод для вычисления факториала
+    {
+        if (n == 0) return 1; // если число 0, возвращаем 1
+        long result = 1; // инициализация результата
+        for (long i = 1; i <= n; i++) result *= i; // вычисляется факториал через цикл
+        return result; // возвращается результат
+    }
+}
