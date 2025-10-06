@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите K: "); // Запрос размера массива
+        if (!int.TryParse(Console.ReadLine(), out int k) || k <= 0) // Проверка, является ли ввод положительным целым числом
+        {
+            Console.WriteLine("Ошибка: введите положительное целое число"); // Вывод ошибки при некорректном вводе
+            return;
+        }
+        Random rand = new Random(); // Создание объекта для генерации случайных чисел
+        char[] array = new char[k]; // Создание массива символов размером K
+        for (int i = 0; i < k; i++) // Цикл для заполнения массива
+        {
+            array[i] = (char)rand.Next('а', 'я' + 1); // Генерация случайной русской буквы от 'а' до 'я'
+        }
+        Console.WriteLine("Исходный массив: " + new string(array)); // Вывод исходного массива
+        HashSet<char> consonants = new HashSet<char> { 'б', 'в', 'г', 'д', 'ж', 'з', 'й', 'к', 'л', 'м', 'н', 'п', 'р', 'с', 'т', 'ф', 'х', 'ц', 'ч', 'ш', 'щ' }; // Множество согласных букв
+        List<char> newArray = new List<char>(); // Список для хранения согласных букв
+        foreach (char c in array) // Проход по исходному массиву
+        {
+            if (consonants.Contains(c)) newArray.Add(c); // Добавление согласной буквы в новый массив
+        }
+        Console.WriteLine("Массив согласных: " + new string(newArray.ToArray())); // Вывод массива согласных
+    }
+}
