@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+class Program
+{
+    // Статический метод для генерации массива с ограниченной суммой
+    static List<int> GenerateArray(int maxSum, Random rand)
+    {
+        List<int> array = new List<int>(); // Создание списка для элементов
+        int currentSum = 0; // Текущая сумма элементов
+
+        while (currentSum < maxSum) // Пока сумма меньше заданного числа
+        {
+            int value = rand.Next(1, 10); // Генерация числа от 1 до 9
+            if (currentSum + value <= maxSum) // Проверка, не превысит ли сумма лимит
+            {
+                array.Add(value); // Добавление элемента в массив
+                currentSum += value; // Увеличение суммы
+            }
+            else break; // Прерывание, если сумма превысит лимит
+        }
+        return array; // Возвращаем массив
+    }
+    static void Main()
+    {
+        Console.Write("Введите максимальную сумму: "); // Запрос максимальной суммы
+        if (!int.TryParse(Console.ReadLine(), out int maxSum) || maxSum <= 0) // Проверка корректности ввода
+        {
+            Console.WriteLine("Ошибка: введите положительное целое число"); // Вывод ошибки
+            return;
+        }
+        Random rand = new Random(); // Объект для генерации чисел
+        List<int> array = GenerateArray(maxSum, rand); // Формирование массива
+        Console.WriteLine("Массив: " + string.Join(" ", array)); // Вывод массива
+        Console.WriteLine("Сумма: " + array.Sum()); // Вывод суммы
+    }
+}
