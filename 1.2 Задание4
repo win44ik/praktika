@@ -1,0 +1,46 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Введите K: "); // Запрос размера массива
+        if (!int.TryParse(Console.ReadLine(), out int k) || k <= 0) // Проверка, является ли ввод положительным целым числом
+        {
+            Console.WriteLine("Ошибка: введите положительное целое число для K"); // Вывод ошибки при некорректном вводе
+            return;
+        }
+        Console.Write("Введите A: "); // Запрос нижней границы диапазона
+        if (!int.TryParse(Console.ReadLine(), out int a)) // Проверка, является ли ввод целым числом
+        {
+            Console.WriteLine("Ошибка: введите целое число для A"); // Вывод ошибки при некорректном вводе
+            return;
+        }
+        Console.Write("Введите B: "); // Запрос верхней границы диапазона
+        if (!int.TryParse(Console.ReadLine(), out int b) || b <= a) // Проверка, является ли B целым числом и больше A
+        {
+            Console.WriteLine("Ошибка: введите целое число для B (B > A)"); // Вывод ошибки при некорректном вводе
+            return;
+        }
+        Random rand = new Random(); // Создание объекта для генерации случайных чисел
+        int[] array = new int[k]; // Создание массива размером K
+        for (int i = 0; i < k; i++) // Цикл для заполнения массива
+        {
+            array[i] = rand.Next(a, b); // Генерация случайного числа в диапазоне [A, B)
+        }
+        Console.WriteLine("Сгенерированный массив: " + string.Join(" ", array)); // Вывод сгенерированного массива
+        int minIndex = 0, maxIndex = 0; // Переменные для индексов минимального и максимального элементов
+        for (int i = 1; i < k; i++) // Цикл для поиска min и max
+        {
+            if (array[i] < array[minIndex]) minIndex = i; // Обновление индекса минимального элемента
+            if (array[i] > array[maxIndex]) maxIndex = i; // Обновление индекса максимального элемента
+        }
+        int start = Math.Min(minIndex, maxIndex); // Начальный индекс (меньший из min и max)
+        int end = Math.Max(minIndex, maxIndex); // Конечный индекс (больший из min и max)
+        Console.Write("Элементы между min и max (включая): "); // Вывод заголовка для результата
+        for (int i = start; i <= end; i++) // Цикл для вывода элементов от start до end
+        {
+            Console.Write(array[i] + " "); // Вывод текущего элемента
+        }
+        Console.WriteLine(); // Переход на новую строку
+    }
+}
