@@ -1,0 +1,17 @@
+using System;
+using System.Linq;
+class Program
+{
+    static void Main()
+    {
+        Random rand = new Random(); // Создание объекта для генерации случайных чисел
+        double[] array = new double[10]; // Создание массива из 10 вещественных чисел
+        for (int i = 0; i < 10; i++) // Цикл для заполнения массива
+        {
+            array[i] = rand.NextDouble() * 20 - 10; // Генерация случайного числа в диапазоне [-10, 10)
+        }
+        Console.WriteLine("Исходный массив: " + string.Join(" ", array.Select(x => x.ToString("F2")))); // Вывод исходного массива с двумя знаками после запятой
+        int[] indices = Enumerable.Range(0, 10).OrderBy(i => array[i]).ToArray(); // Создание массива индексов, отсортированных по возрастанию значений элементов
+        Console.WriteLine("Массив индексов по возрастанию: " + string.Join(" ", indices)); // Вывод массива индексов
+    }
+}
