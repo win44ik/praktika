@@ -1,0 +1,33 @@
+using System;
+class Program
+{
+    // Статический метод для вычисления НОД двух чисел
+    static int GCD(int a, int b)
+    {
+        while (b != 0) // Пока b не равно 0
+        {
+            int temp = b; // Сохраняем текущее значение b
+            b = a % b; // Присваиваем b остаток от деления a на b
+            a = temp; // Присваиваем a предыдущее значение b
+        }
+        return a; // Возвращаем НОД
+    }
+    static void Main()
+    {
+        Console.Write("Введите числитель: "); // Запрос числителя
+        if (!int.TryParse(Console.ReadLine(), out int numerator) || numerator < 0) // Проверка корректности ввода
+        {
+            Console.WriteLine("Ошибка: введите неотрицательное целое число"); // Вывод ошибки
+            return;
+        }
+
+        Console.Write("Введите знаменатель: "); // Запрос знаменателя
+        if (!int.TryParse(Console.ReadLine(), out int denominator) || denominator <= 0) // Проверка корректности ввода
+        {
+            Console.WriteLine("Ошибка: введите положительное целое число"); // Вывод ошибки
+            return;
+        }
+        int gcd = GCD(numerator, denominator); // Вычисление НОД
+        Console.WriteLine($"Сокращенная дробь: {numerator / gcd}/{denominator / gcd}"); // Вывод результата
+    }
+}
