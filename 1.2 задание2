@@ -1,0 +1,28 @@
+using System;
+class Program
+{
+    static void Main()
+    {
+        Random rand = new Random(); // Создание объекта для генерации случайных чисел
+        int[] array = new int[10]; // Создание массива из 10 элементов
+        for (int i = 0; i < array.Length; i++) // Цикл для заполнения массива
+        {
+            array[i] = rand.Next(-100, 100); // Генерация случайного числа от -100 до 99
+        }
+        Console.WriteLine("Исходный массив: " + string.Join(" ", array)); // Вывод исходного массива
+
+        Console.Write("Введите целое число для замены: "); // Запрос числа для замены
+        if (!int.TryParse(Console.ReadLine(), out int replacement)) // Проверка, является ли ввод целым числом
+        {
+            Console.WriteLine("Ошибка: введите целое число"); // Вывод ошибки при некорректном вводе
+            return;
+        }
+        int maxIndex = 0; // Переменная для индекса максимального элемента
+        for (int i = 1; i < array.Length; i++) // Цикл для поиска максимального элемента
+        {
+            if (array[i] > array[maxIndex]) maxIndex = i; // Обновление индекса, если текущий элемент больше
+        }
+        array[maxIndex] = replacement; // Замена максимального элемента введенным числом
+        Console.WriteLine("Измененный массив: " + string.Join(" ", array)); // Вывод измененного массива
+    }
+}
