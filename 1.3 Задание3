@@ -1,0 +1,60 @@
+using System;
+using System.Linq;
+class Program
+{
+    // Статический метод для вычисления суммы строки
+    static int GetRowSum(int[] row)
+    {
+        return row.Sum(); // Возвращает сумму элементов строки
+    }
+
+    // Статический метод для вывода матрицы
+    static void PrintMatrix(int[,] matrix)
+    {
+        for (int i = 0; i < matrix.GetLength(0); i++) // Проход по строкам
+        {
+            for (int j = 0; j < matrix.GetLength(1); j++) // Проход по столбцам
+            {
+                Console.Write($"{matrix[i, j],4}"); // Вывод элемента с выравниванием
+            }
+            Console.WriteLine(); // Переход на новую строку
+        }
+    }
+    static void Main()
+    {
+        Console.Write("Введите размер матрицы N: "); // Запрос размера матрицы
+        if (!int.TryParse(Console.ReadLine(), out int n) || n <= 0) // Проверка корректности ввода
+        {
+            Console.WriteLine("Ошибка: введите положительное целое число"); // Вывод ошибки
+            return;
+        }
+        Random rand = new Random(); // Объект для генерации чисел
+        int[,] matrix = new int[n, n]; // Создание квадратной матрицы
+        for (int i = 0; i < n; i++) // Заполнение матрицы
+        {
+            for (int j = 0; j < n; j++)
+            {
+                matrix[i, j] = rand.Next(-50, 51); // Случайное число от -50 до 50
+            }
+        }
+        Console.WriteLine("Исходная матрица:"); // Вывод заголовка
+        PrintMatrix(matrix); // Вывод исходной матрицы
+        // Сортировка строк по суммам
+        var rowSums = new (int sum, int index)[n];
+        for (int i = 0; i < n; i++) // Вычисление сумм строк
+        {
+            rowSums[i] = (GetRowSum(Enumerable.Range(0, n).Select(j => matrix[i, j]).ToArray()), i);
+        }
+        var sortedRows = rowSums.OrderBy(x => x.sum).ToArray(); // Сортировка по суммам
+        int[,] sortedMatrix = new int[n, n]; // Создание отсортированной матрицы
+        for (int i = 0; i < n; i++) // Заполнение отсортированной матрицы
+        {
+            for (int j = 0; j < n; j++)
+            {
+                sortedMatrix[i, j] = matrix[sortedRows[i].index, j];
+            }
+        }
+        Console.WriteLine("Отсортированная матрица:"); // Вывод заголовка
+        PrintMatrix(sortedMatrix); // Вывод отсортированной матрицы
+    }
+}
